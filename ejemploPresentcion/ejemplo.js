@@ -8,6 +8,22 @@ class NuevoElementoWeb extends HTMLElement{
         shadow.appendChild(div);
 
     }
+    connectedCallback(){
+        console.log('Load NuevoElementoWeb agregado');
+    }
+
+    disconnedtedCallback(){
+        console.log('Removiendo NuevoElementoWeb');
+    }
+
+    attributeChangeCallback(name,oldValue,newValue){
+        console.log('Cambian propiedades', name, oldValue, newValue);
+    }
+
+    static get observedAttributes() {
+        return ['c', 'l'];
+    }
+ 
 }
 
 customElements.define('nuevo-elemento-web', NuevoElementoWeb);
