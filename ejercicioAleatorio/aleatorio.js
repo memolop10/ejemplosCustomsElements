@@ -6,10 +6,17 @@ class MiComponente extends HTMLElement {
         let arregloNumeros = this.obtenerArregloDeNumeros(numeroAleatorio);
         let numeroParaBuscar = this.obtenerNumeroParaBuscar(arregloNumeros.length);
         console.log('Numero para buscar: ' + numeroParaBuscar);
+        shadow.appendChild(this.crearParrafoNumeroparabuscar(numeroParaBuscar));
         arregloNumeros.forEach(numero => {
             shadow.appendChild(this.crearDiv(numero, numeroParaBuscar));
         });
  
+    }
+
+    crearParrafoNumeroparabuscar(numeroParaBuscar){
+        let paragraph = document.createElement('p');
+        paragraph.textContent = 'Encuentra el numero ' + numeroParaBuscar;
+        return paragraph;
     }
  
     obtenerNumeroParaBuscar(cantidad) {
