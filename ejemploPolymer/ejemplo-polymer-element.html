@@ -7,8 +7,9 @@
         display: block;
       }
     </style>
+    <h1>[[isDisabled]]</h1>
     <h2>Hello [[prop1]]!</h2>
-    <h2>[[conputedProp1]]</h2>
+    <h2>[[computedProp1]]</h2>
   </template>
 
   <script>
@@ -21,8 +22,40 @@
             type: String,
             value: 'ejemplo-polymer-element',
             reflectToAttribute: true
+          },
+          computedProp1:{
+            type:String,
+            computed:'_getProp1(prop1)'
+          },
+          name:{
+            type:String,
+            observer:'_observaName'
+          },
+          lastName:String,
+          isDisabled:{
+            type:Boolean,
+            value:true
           }
         };
+      }
+
+      _getProp1(prop1){
+        return `Hello ${prop1}!`;
+      }
+
+      _observaName(newValue, oldValue){
+        console.log(newValue, oldValue);
+      }
+
+      static get observers(){
+        return['_observaNameAndLastName(name,lastName)']
+      }
+
+      _observaNameAndLastName(name,lastName){
+        console.log(name,lastName, 'esto es el complex observer');
+        if(name && lastName){
+          this.isDisabled = false;
+        }
       }
     }
 
