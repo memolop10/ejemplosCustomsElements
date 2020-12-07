@@ -7,7 +7,20 @@
         display: block;
       }
     </style>
+    <template is="dom-if" if="[[isDisabled]]">
+      Necesitamos info del Nombre y last Name para que desaparezca
+    </template>
+    <div>
+      <template is="dom-repeat" items="{{nombres}}" as="name" index-as="nameIdx">
+        {{name}} - {{nameIdx}}
+        <template is="dom-repeat" items="{{nombres}}" as="local">
+          {{local}} - {{index}}
+        </template>
+      </template>
+    </div>
+    
     <h1>[[isDisabled]]</h1>
+    <h2>Hello [[objExample.user.lastName]]</h2>
     <h2>Hello [[prop1]]!</h2>
     <h2>[[computedProp1]]</h2>
   </template>
@@ -23,6 +36,29 @@
             value: 'ejemplo-polymer-element',
             reflectToAttribute: true
           },
+          objExample:{
+            type: Object,
+            value: () => ({
+              user:{
+                lastName: 'Lopez',
+                name: 'Guillermo',
+                surname:'Vargas'
+              },
+              job:{
+                company:{
+                  name:'GFT',
+                  addres:{
+                    cp:'03020',
+                    street:'Vicente Eguia 46'
+                  }
+                }
+              }
+            })
+          },
+          nombres:{
+            type:Array,
+            value:() => (['MEMO','Luisa','Enrique'])
+          },
           computedProp1:{
             type:String,
             computed:'_getProp1(prop1)'
@@ -37,6 +73,16 @@
             value:true
           }
         };
+      }
+
+      connectedCallback(){
+        super.connectedCallback();
+        const dynamic = 'lastName'
+        console.log(this.objExample);
+        console.log(this.objExample.user[dynamic]);
+        console.log(this.get('objExample.user.lastName'));
+        console.log(this.get(['objExample.user', dynamic]));
+        this.set(['objExample.user',dynamic], 'HolA');
       }
 
       _getProp1(prop1){
