@@ -1,26 +1,32 @@
 class MiComponente extends HTMLElement {
     constructor() {
         super();
-        const shadow = this.attachShadow({ mode: "open" });
-        let numeroAleatorio = this.obtenerNumeroAleatorio();
-        let arregloNumeros = this.obtenerArregloDeNumeros(numeroAleatorio);
-        let numeroParaBuscar = this.obtenerNumeroParaBuscar(arregloNumeros.length);
-        console.log('Numero para buscar: ' + numeroParaBuscar);
-        shadow.appendChild(this.crearParrafoNumeroparabuscar(numeroParaBuscar));
-        arregloNumeros.forEach(numero => {
-            shadow.appendChild(this.crearDiv(numero, numeroParaBuscar));
-        });
- 
+        const shadow = this.attachShadow({ mode: 'open' });
+        this.inicializandoComponente();
     }
 
-    crearParrafoNumeroparabuscar(numeroParaBuscar){
+    inicializandoComponente() {
+      const shadow = this.shadowRoot;
+      let numeroAleatorio = this.obtenerNumeroAleatorio();
+      let arregloNumeros = this.obtenerArregloDeNumeros(numeroAleatorio);
+      let numeroParaBuscar = this.obtenerNumeroParaBuscar(arregloNumeros.length);
+      console.log('Numero para buscar: ' + numeroParaBuscar);
+      shadow.appendChild(this.crearParrafoNumeroParaBuscar(numeroParaBuscar));
+      arregloNumeros.forEach(numero => {
+      const figura = this.crearDiv(numero, numeroParaBuscar);
+      this.addEventWinner(figura,numero,numeroParaBuscar);
+      shadow.appendChild(figura);
+      });
+    }
+
+    crearParrafoNumeroParaBuscar(numeroParaBuscar) {
         let paragraph = document.createElement('p');
         paragraph.textContent = 'Encuentra el numero ' + numeroParaBuscar;
         return paragraph;
     }
  
     obtenerNumeroParaBuscar(cantidad) {
-        return Math.floor((Math.random() * cantidad) + 1)
+        return Math.floor((Math.random() * cantidad) + 1);
     }
     obtenerNumeroAleatorio() {
         return Math.floor((Math.random() * 10) + 1);
@@ -31,7 +37,7 @@ class MiComponente extends HTMLElement {
         while (arreglo.length < cantidad) {
             let numero = Math.floor((Math.random() * cantidad) + 1);
             let numeroEncontrado = arreglo.find((n) => n === numero);
-            if (numeroEncontrado === undefined) {
+            if (!numeroEncontrado) {
                 arreglo.push(numero);
             }
         }
@@ -48,6 +54,20 @@ class MiComponente extends HTMLElement {
         div.style.alignItems = 'center';
         div.textContent = numero;
         return div;
+    }
+
+    addEventWinner(div,numero,numeroParaBuscar){
+      div.addEventListener('click',() => {
+        this.validarGanador(numero,numeroParaBuscar);
+      });
+    }
+
+    validarGanador(numero, numeroParaBuscar) {
+      if(numero === numeroParaBuscar){
+        alert('encontraste el numero');
+        this.shadowRoot.innerHTML = '';
+        this.inicializandoComponente();
+      }
     }
  
 };

@@ -11,12 +11,10 @@
       Necesitamos info del Nombre y last Name para que desaparezca
     </template>
     <div>
-      <template is="dom-repeat" items="{{nombres}}" as="name" index-as="nameIdx">
-        {{name}} - {{nameIdx}}
-        <template is="dom-repeat" items="{{nombres}}" as="local">
-          {{local}} - {{index}}
+        <template is="dom-repeat" items="{{nombres}}" as="local" sort={{ageSort}}>
+          {{local.name}} - {{index}}
+          {{local.age}} - {{index}}
         </template>
-      </template>
     </div>
     
     <h1>[[isDisabled]]</h1>
@@ -57,7 +55,16 @@
           },
           nombres:{
             type:Array,
-            value:() => (['MEMO','Luisa','Enrique'])
+            value:() => ([{
+              name:'MEMO',
+              age:26
+            },{
+              name:'Luisa',
+              age:49
+            },{
+              name:'Enrique',
+              age:26
+            }])
           },
           computedProp1:{
             type:String,
@@ -83,6 +90,10 @@
         console.log(this.get('objExample.user.lastName'));
         console.log(this.get(['objExample.user', dynamic]));
         this.set(['objExample.user',dynamic], 'HolA');
+      }
+
+      ageSort(items){
+        console.log(items);
       }
 
       _getProp1(prop1){
