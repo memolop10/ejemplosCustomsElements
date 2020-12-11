@@ -1,0 +1,32 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="child-element">
+    <template>
+        <style>
+            :host {
+                display: block
+            }
+        </style>
+       
+        <label>[[user.nombre]] [[user.edad]]</label>
+
+    </template>
+
+    <script>
+        class ChildElement extends Polymer.Element {
+            static get is() {
+                return 'child-element';
+            }
+
+            static get properties() {
+                return {
+                 user:{
+                     type:Object
+                 }
+                };
+            }
+        }
+
+        window.customElements.define(ChildElement.is, ChildElement);
+    </script>
+</dom-module>

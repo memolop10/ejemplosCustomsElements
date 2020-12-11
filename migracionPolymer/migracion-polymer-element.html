@@ -1,0 +1,82 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="./box-number.html">
+<link rel="import" href="./p-find-number.html">
+
+<dom-module id="migracion-polymer-element">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <p-find-number find-number="{{numberFind}}"></p-find-number>
+    <template is="dom-repeat" items="{{boxes}}" as="box">
+      <box-number number-box="{{box}}" on-click="alerta"></box-number>
+    </template>
+
+  </template>
+
+  <script>
+
+    class MigracionPolymerElement extends Polymer.Element {
+      static get is() { return 'migracion-polymer-element'; }
+      static get properties() {
+        return {
+          boxes: {
+            type: Array,
+            value: () => ([])
+          },
+          cantidad:{
+            type:Number,
+            value:10
+          },
+          numberFind:Number,
+        };
+      }
+
+      ready() {
+        super.ready();
+        this.inicializarComponente();
+      }
+
+      inicializarComponente(){
+        this.set('cantidad',this._obtenerNumeroBoxes());
+        this.set('boxes',this.obtenerArregloDeNumeros());    
+        this.set('numberFind',this._obtenerNumeroParaBuscar());
+      }
+
+      alerta(e){
+        if(this.numberFind === e.model.box){
+          alert('encontraste el numero');
+          this.inicializarComponente();
+        }
+      }
+
+      _obtenerNumeroParaBuscar() {
+        return this._obtenerNumeroAleatorio(this.cantidad);
+      }
+
+      _obtenerNumeroAleatorio(limite){
+        return Math.floor((Math.random() * (!limite ? 10 : limite)) + 1);
+      }
+    
+      _obtenerNumeroBoxes(){
+        return this._obtenerNumeroAleatorio();
+      }
+
+      obtenerArregloDeNumeros() {
+        let arreglo = [];
+        while (arreglo.length < this.cantidad) {
+          let numero = Math.floor((Math.random() * this.cantidad) + 1);
+          let numeroEncontrado = arreglo.find((n) => n === numero);
+          if (!numeroEncontrado) {
+            arreglo.push(numero);
+          }
+        }
+        return arreglo;
+      }
+
+    }
+    window.customElements.define(MigracionPolymerElement.is, MigracionPolymerElement);
+  </script>
+</dom-module>

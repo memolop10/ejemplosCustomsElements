@@ -1,0 +1,86 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="./child-element.html">
+
+<dom-module id="host-element">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <button on-click="ocultarUsers">ocultar</button>
+    <template is="dom-if" if="{{mostrar}}">
+      <template is="dom-repeat" items="{{users}}" as="user">
+        <child-element user="[[user]]" on-click="obtenerValueArray"></child-element>
+      </template>
+
+    </template>
+    
+  </template>
+
+  <script>
+    class HostElement extends Polymer.Element {
+      static get is() { return 'host-element'; }
+      static get properties() {
+        return {
+          users: {
+            type: Array,
+              value: () => ([
+              {
+                nombre: 'memo',
+                edad: 26
+              },
+              {
+                nombre: 'Jr',
+                edad: 28
+              }
+            ])
+          },
+          active:{
+            type:String,
+          },
+          numero1:{
+            type:Number,
+            observer:'_activeChanged'
+          },
+          numero2:Number,
+          mostrar:{
+            type:Boolean,
+            value:true
+          }
+        };
+      }
+
+      ocultarUsers(){
+       return this.set('mostrar',false);
+      }
+
+      _activeChanged(newValue,oldValue){
+        return console.log( 'Observer Simple:', 'Nuevo valor' ,newValue , 'viejo Valor' ,oldValue);
+      }
+
+      obtenerValueArray(){
+        return console.log(this.get('users',0));
+      }
+
+      //nombre de metodos deben ser siempre verbos
+      mostrarAlerta(e){
+        let edad = e.model.user.edad;
+        e.model.set('user.edad',edad + 5);
+        alert('la edad es: ' + e.model.user.edad);
+      }
+
+      static get observers() {
+        return [
+          'changed(numero1 , numero2)'
+        ];
+      }
+
+      changed(numero1 , numero2){
+        return console.log('Observer Complejo', 'Valor numero1' , numero1 , 'valor numero2' , numero2 );
+      }
+    }
+
+    window.customElements.define(HostElement.is, HostElement);
+  </script>
+</dom-module>

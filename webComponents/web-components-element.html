@@ -1,0 +1,81 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="./bower_components/paper-card/paper-card.html">
+<link rel="import" href="./bower_components/paper-badge/paper-badge.html">
+<link rel="import" href="./bower_components/paper-button/paper-button.html">
+<link rel="import" href="./bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="./bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="./bower_components/paper-item/paper-item.html">
+<link rel="import" href="./bower_components/paper-icon-button/paper-icon-button.html">
+<dom-module id="web-components-element">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      .bg-img{
+        width: 500px;
+        height: 400px;
+      }
+      paper-badge{
+        --paper-badge-background:#000f;
+        --paper-badge-width:30px; 
+        --paper-badge:{
+          display: flex;
+          justify-content:center;
+          align-items: center;
+        }
+        paper-button{
+          --paper-button:{
+          background-color: black;
+          }
+        }
+        paper-icon-button{
+          --paper-icon-button:{
+            background-color:red;
+            color:white;
+          }
+        }
+      }
+    </style>
+
+    <paper-dropdown-menu>
+      <paper-listbox slot="dropdown-content" selected="1">
+        <paper-item>Enrique</paper-item>
+        <paper-item>Eri</paper-item>
+        <paper-item>JR</paper-item>
+        <paper-item>Memo</paper-item>
+    </paper-dropdown-menu>
+    <paper-badge label="5"></paper-badge>
+    <paper-card>
+      <div>
+        <img class="bg-img" src="https://perros.mascotahogar.com/Imagenes/ojos-del-husky-siberiano.jpg">
+      </div>
+      <paper-button>
+        <span>
+          Button
+          <paper-icon-button 
+            src="https://as1.ftcdn.net/jpg/03/90/89/98/500_F_390899823_vNdyT8GVaTjElcjXTAKZ2W7fOhs2Fly0.jpg">
+          </paper-icon-button>
+        </span>
+      </paper-button>
+      
+    </paper-card>
+    
+  </template>
+
+  <script>
+    class WebComponentsElement extends Polymer.Element {
+      static get is() { return 'web-components-element'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'web-components-element'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(WebComponentsElement.is, WebComponentsElement);
+  </script>
+</dom-module>

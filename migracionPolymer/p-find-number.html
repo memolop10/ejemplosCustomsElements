@@ -1,0 +1,25 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="p-find-number">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <p>Encuentra el numero: [[findNumber]]</p>
+  </template>
+
+  <script>
+
+    class PFindNumber extends Polymer.Element {
+      static get is() { return 'p-find-number'; }
+      static get properties() {
+        return {
+          findNumber: Number
+        };
+      }
+    }
+    window.customElements.define(PFindNumber.is, PFindNumber);
+  </script>
+</dom-module>

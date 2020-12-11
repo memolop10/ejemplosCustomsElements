@@ -1,0 +1,37 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="box-number">
+  <template>
+    <style>
+      :host {
+          display: inline-flex;
+      } 
+      .box{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border: solid 2px black;
+          width: 100px;
+          height: 100px;
+      }
+    </style>
+    
+      <div class="box">
+        [[numberBox]]
+      </div>
+  </template>
+
+  <script>
+
+    class BoxNumber extends Polymer.Element {
+      static get is() { return 'box-number'; }
+      static get properties() {
+        return {
+          numberBox:Number
+        };
+      }
+    }
+
+    window.customElements.define(BoxNumber.is, BoxNumber);
+  </script>
+</dom-module>

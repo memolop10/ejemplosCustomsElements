@@ -1,0 +1,39 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="ejemplo-box">
+    <template>
+        <style>
+            :host {
+                display: block
+            }
+        </style>
+
+        <div>{{name}} - desde el componente</div>
+        <button on-clck="clickName">Click</button>
+
+    </template>
+
+    <script>
+      
+        class EjemploBox extends Polymer.Element {
+          
+            static get is() {
+                return 'ejemplo-box';
+            }
+            static get properties() {
+                return {
+                    name:{
+                      type:String,
+                      notify:true // se crea un customEvent property - Changed
+                    }//name-changed
+                };
+            }
+
+            clickName(){
+                this.name = 'MEMO desde el componente' + Math.random();
+            }
+        }
+
+        window.customElements.define(EjemploBox.is, EjemploBox);
+    </script>
+</dom-module>
