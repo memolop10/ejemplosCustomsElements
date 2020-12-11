@@ -1,17 +1,17 @@
 <link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="./bower_components/paper-card/paper-card.html">
-<link rel="import" href="./bower_components/paper-badge/paper-badge.html">
-<link rel="import" href="./bower_components/paper-button/paper-button.html">
-<link rel="import" href="./bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
-<link rel="import" href="./bower_components/paper-listbox/paper-listbox.html">
-<link rel="import" href="./bower_components/paper-item/paper-item.html">
-<link rel="import" href="./bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="./bower_components/paper-styles/color.html">
-<link rel="import" href="./bower_components/paper-progress/paper-progress.html">
-<link rel="import" href="./bower_components/paper-spinner/paper-spinner.html">
-<link rel="import" href="./bower_components/paper-spinner/paper-spinner-lite.html">
-<link rel="import" href="./bower_components/paper-swatch-picker/paper-swatch-picker.html">
-<link rel="import" href="./bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../paper-card/paper-card.html">
+<link rel="import" href="../paper-badge/paper-badge.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../paper-listbox/paper-listbox.html">
+<link rel="import" href="../paper-item/paper-item.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../paper-styles/color.html">
+<link rel="import" href="../paper-progress/paper-progress.html">
+<link rel="import" href="../paper-spinner/paper-spinner.html">
+<link rel="import" href="../paper-spinner/paper-spinner-lite.html">
+<link rel="import" href="../paper-swatch-picker/paper-swatch-picker.html">
+<link rel="import" href="../paper-tabs/paper-tabs.html">
 
 <dom-module id="web-components-element">
   <template>
@@ -31,17 +31,16 @@
           justify-content:center;
           align-items: center;
         }
+      }
         paper-button{
+          height: 50px;
+          margin: 10px;
           --paper-button:{
           background-color: black;
+          color:white;
           }
         }
-        paper-icon-button{
-          --paper-icon-button:{
-            background-color:red;
-            color:white;
-          }
-        }
+    
         paper-progress{
           --paper-progress-active-color: var(--paper-light-blue-500);
           --paper-progress-secondary-color: var(--paper-light-blue-100);
@@ -52,13 +51,13 @@
           width: 100%;
           text-transform: uppercase;
           margin-bottom: 1px;
-          background-color:;
+          
         }
-      }
+      
       
     </style>
 
-    <paper-tabs selected="0" scrollable>
+    <paper-tabs selected="1" scrollable>
       <paper-tab>The first tab</paper-tab>
       <paper-tab>Tab two</paper-tab>
       <paper-tab>The third tab</paper-tab>
