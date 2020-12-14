@@ -12,6 +12,8 @@
 <link rel="import" href="../paper-spinner/paper-spinner-lite.html">
 <link rel="import" href="../paper-swatch-picker/paper-swatch-picker.html">
 <link rel="import" href="../paper-tabs/paper-tabs.html">
+<link rel="import" href="../paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../paper-tooltip/paper-tooltip.html">
 
 <dom-module id="web-components-element">
   <template>
@@ -53,9 +55,25 @@
           margin-bottom: 1px;
           
         }
+        paper-icon-button{
+          background: #eaeaea;
+          border-radius: 50%;
+        }
+        paper-toolbar{
+          color:white;
+          --paper-toolbar-background:rgb(94, 95, 155);
+          --paper-toolbar-sm-height:100px;
+        }
       
       
     </style>
+
+    <paper-icon-button id="id_1" src="https://icons-for-free.com/iconfiles/png/512/polymer-1321215624433208960.png" alt="heart"></paper-icon-button>
+    <paper-tooltip for="id_1" offset="0">Soy el Tooltip</paper-tooltip>
+
+    <paper-toolbar>
+      <div slot="top" class="title">Title</div>
+    </paper-toolbar>
 
     <paper-tabs selected="1" scrollable>
       <paper-tab>The first tab</paper-tab>

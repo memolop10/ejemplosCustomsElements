@@ -13,7 +13,9 @@
     "paper-progress": "PolymerElements/paper-progress#2.1.1",
     "paper-spinner": "PolymerElements/paper-spinner#2.1.0",
     "paper-swatch-picker": "PolymerElements/paper-swatch-picker#2.2.1",
-    "paper-tabs": "PolymerElements/paper-tabs#2.1.1"
+    "paper-tabs": "PolymerElements/paper-tabs#2.1.1",
+    "paper-toolbar": "PolymerElements/paper-toolbar#2.1.0",
+    "paper-tooltip": "PolymerElements/paper-tooltip#2.1.1"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
