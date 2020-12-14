@@ -8,10 +8,11 @@
         display: block;
       }
     </style>
-    <button on-click="ocultarUsers">ocultar</button>
+    <button on-click="ocultarUsers">[[textButton]]</button>
+    <button on-click="addUser">Add</button>
     <template is="dom-if" if="{{mostrar}}">
       <template is="dom-repeat" items="{{users}}" as="user">
-        <child-element user="[[user]]" on-click="mostrarAlerta"></child-element>
+        <child-element user="[[user]]" on-click="yaLeDioClick"></child-element>
       </template>
 
     </template>
@@ -47,12 +48,22 @@
           mostrar:{
             type:Boolean,
             value:true
+          },
+          textButton:{
+            type:String,
+            value:'Ocultar'
           }
         };
       }
 
       ocultarUsers(){
-       return this.set('mostrar',false);
+        if(this.mostrar === true){
+          this.set('mostrar',false);
+          this.set('textButton','Mostrar');
+        }else{
+          this.set('mostrar',true);
+          this.set('textButton','Ocultar');
+        }
       }
 
       _activeChanged(newValue,oldValue){
@@ -71,14 +82,31 @@
         alert('la edad es: ' + e.model.user.edad);
       }
 
+      yaLeDioClick(e){
+        e.model.set('user.nombre','Enrique');
+        console.log('model: ',e.model, 'target: ',e.target);
+        console.log(this.get(['users',0]));
+      }
+
+      addUser(){
+        this.push('users',{
+          nombre:'The Best' + new Date().getTime()
+        });
+      }
+
       static get observers() {
         return [
-          'changed(numero1 , numero2)'
+          'changed(numero1 , numero2)',
+          '_observerComplejo(users.*)'
         ];
       }
 
       changed(numero1 , numero2){
         return console.log('Observer Complejo', 'Valor numero1' , numero1 , 'valor numero2' , numero2 );
+      }
+
+      _observerComplejo(users){
+        console.log('Complejo Arreglo',users);
       }
     }
 
