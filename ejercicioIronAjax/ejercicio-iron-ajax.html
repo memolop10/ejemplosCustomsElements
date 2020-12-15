@@ -10,10 +10,14 @@
         display: block;
       }
       paper-card {
-	      width: 100%;
+	      width: 70%;
         margin: 10px;
         --paper-card-background-color:#000F;
         color:#FFFF;
+        --paper-card-header-image: {
+          max-height: 200px;
+          width: 100%;
+        };
       }
       p,span{
         margin: 10px;
@@ -28,11 +32,11 @@
   >
 </iron-ajax>
 
-    <h2>Hola [[prop1]]!</h2>
+    <h2>Users List</h2>
     
     <template is="dom-repeat" items="{{users}}" as="user">
-      <iron-collapse>
-        <paper-card>
+      
+        <paper-card image="[[user.picture]]">
           <div class="nameContent">
             <p on-click="toggle">[[user.name.first]] [[user.name.last]]</p>
           </div>
@@ -40,10 +44,10 @@
             <p>[[user.about]]</p>
           </div>
           <div>
-            <span>[[user.balance]]</span>
+            <span>[[darFormatoBalance(user.balance)]]</span>
           </div>
         </paper-card>
-      </iron-collapse>
+      
     </template>
   </template>
 
@@ -52,13 +56,7 @@
       static get is() { return 'ejercicio-iron-ajax'; }
       static get properties() {
         return {
-          users: {
-            type: Array,
-          },
-          balance:{
-            type:String,
-            computed:'darFormato(users)'
-          }
+          users:Array,
         };
       }
 
@@ -68,6 +66,10 @@
         this.set('users',iron.response);
       }
 
+      darFormatoBalance(balance){
+        let regExp= /[$]+/g;
+        return balance.replaceAll(regExp, "");
+      }
      
     }
 
