@@ -1,0 +1,78 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+<link rel="import" href="../paper-card/paper-card.html">
+<link rel="import" href="../iron-collapse/iron-collapse.html">
+
+<dom-module id="ejercicio-iron-ajax">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      paper-card {
+	      width: 100%;
+        margin: 10px;
+        --paper-card-background-color:#000F;
+        color:#FFFF;
+      }
+      p,span{
+        margin: 10px;
+      }
+    </style>
+
+<iron-ajax
+  id='ajaxRequest'  
+  auto
+  url="http://demo6292426.mockable.io/persons"
+  on-response="handleResponse"
+  >
+</iron-ajax>
+
+    <h2>Hola [[prop1]]!</h2>
+    
+    <template is="dom-repeat" items="{{users}}" as="user">
+      <iron-collapse>
+        <paper-card>
+          <div class="nameContent">
+            <p on-click="toggle">[[user.name.first]] [[user.name.last]]</p>
+          </div>
+          <div class="aboutContent">
+            <p>[[user.about]]</p>
+          </div>
+          <div>
+            <span>[[user.balance]]</span>
+          </div>
+        </paper-card>
+      </iron-collapse>
+    </template>
+  </template>
+
+  <script>
+    class EjercicioIronAjax extends Polymer.Element {
+      static get is() { return 'ejercicio-iron-ajax'; }
+      static get properties() {
+        return {
+          users: {
+            type: Array,
+          },
+          balance:{
+            type:String,
+            computed:'darFormato(users)'
+          }
+        };
+      }
+
+      handleResponse(e,iron){
+        console.log(e,iron);
+        console.log(iron.response);
+        this.set('users',iron.response);
+      }
+
+     
+    }
+
+   
+
+    window.customElements.define(EjercicioIronAjax.is, EjercicioIronAjax);
+  </script>
+</dom-module>
