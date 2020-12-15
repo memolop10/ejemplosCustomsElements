@@ -35,17 +35,18 @@
     <h2>Users List</h2>
     
     <template is="dom-repeat" items="{{users}}" as="user">
-      
         <paper-card image="[[user.picture]]">
           <div class="nameContent">
-            <p on-click="toggle">[[user.name.first]] [[user.name.last]]</p>
+            <p on-click="showInfo">[[user.name.first]] [[user.name.last]]</p>
           </div>
-          <div class="aboutContent">
-            <p>[[user.about]]</p>
-          </div>
-          <div>
-            <span>[[darFormatoBalance(user.balance)]]</span>
-          </div>
+          <iron-collapse opened="{{user.open}}">
+            <div class="aboutContent">
+              <p>[[user.about]]</p>
+            </div>
+            <div>
+              <span>[[darFormatoBalance(user.balance)]]</span>
+            </div>
+          </iron-collapse>
         </paper-card>
       
     </template>
@@ -61,14 +62,18 @@
       }
 
       handleResponse(e,iron){
-        console.log(e,iron);
-        console.log(iron.response);
+        // console.log(iron.response);
         this.set('users',iron.response);
       }
 
       darFormatoBalance(balance){
         let regExp= /[$]+/g;
         return balance.replaceAll(regExp, "");
+      }
+
+      showInfo(e){
+        console.log(e.model);
+        e.model.set('user.open',!e.model.user.open);
       }
      
     }
