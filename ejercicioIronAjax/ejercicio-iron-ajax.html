@@ -42,6 +42,15 @@
         border-radius: 20%;
         margin-top: 20px;
       }
+      li{
+        color: darkorange;
+      }
+      .showFriendButton{
+        border-radius: 25px;
+        margin:20px 10px 0 10px;
+        background-color: darkorange;
+        color: #FFFF;
+      }
     </style>
 
 <iron-ajax
@@ -67,11 +76,21 @@
               <span>[[darFormatoBalance(user.balance)]]</span> 
             </div>
             <div>
-              <span class="spanEyes">Eye Color:<div class="eyesColor" style$="background-color: {{user.eyeColor}}"></div></span>
+              <span class="spanEyes">Eye Color: <div class="eyesColor" style$="background-color: {{user.eyeColor}}"></div></span>
             </div>
             <div>
               <span>Favorite Fruit: [[favoriteFruit(user.favoriteFruit)]]</span>
             </div>
+            <button class="showFriendButton" on-click="showFriends">Show me my friends</button>
+            <iron-collapse opened="{{user.showFriends}}">
+            <div>
+              <ul>
+                <template is="dom-repeat" items="{{user.friends}}" as="friend">
+                  <li>[[friend.name]]</li>
+                </template>
+              </ul>
+            </div>
+          </iron-collapse>
             <div class="mapContainer" id="leaflet-map-{{index}}"></div>
           </iron-collapse>
         </paper-card>
@@ -108,6 +127,10 @@
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
+      }
+
+      showFriends(e) {
+        e.model.set('user.showFriends', !e.model.user.showFriends);
       }
 
       favoriteFruit(favoriteFruit) {
