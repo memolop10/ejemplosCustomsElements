@@ -1,0 +1,24 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../iron-overlay-behavior/iron-overlay-behavior.html">
+
+    <script>
+
+        Mixins.MixinDialog = Polymer.deduping((base) =>
+          class extends base{
+            constructor(){
+                super();
+            }
+        
+        static get properties() {
+                return {
+                    propMixin:{
+                        type:String,
+                        value:'mixin-Dialog',
+                        Observer:'_veElMixin'
+                    }
+                };
+            }
+          }
+        );
+        
+    </script>

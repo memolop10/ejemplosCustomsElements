@@ -2,6 +2,9 @@
 <link rel="import" href="../iron-ajax/iron-ajax.html">
 <link rel="import" href="../paper-card/paper-card.html">
 <link rel="import" href="../iron-collapse/iron-collapse.html">
+<link rel="import" href="../paper-dialog/paper-dialog.html">
+<link rel="import" href="./mixin-dialog.html">
+
 
 <dom-module id="ejercicio-iron-ajax">
   <template>
@@ -54,12 +57,18 @@
     </style>
 
 <iron-ajax
-  id='ajaxRequest'  
-  auto
+  id='ajaxRequest' 
   url="http://demo6292426.mockable.io/persons"
   on-response="handleResponse"
   >
 </iron-ajax>
+
+  <paper-dialog on-click="modal.open">
+    <div>
+      <button>Ver intento de Consulta</button>
+      <button>Cancelar</button>
+    </div>
+  </paper-dialog>
 
     <h2>Users List</h2>
     
@@ -99,7 +108,8 @@
   </template>
 
   <script>
-    class EjercicioIronAjax extends Polymer.Element {
+    console.log(Mixins.MyDialog);
+    class EjercicioIronAjax extends Mixins.MixinDialog(Polymer.Element){
       static get is() { return 'ejercicio-iron-ajax'; }
       static get properties() {
         return {
@@ -108,7 +118,6 @@
       }
 
       handleResponse(e,iron){
-        // console.log(iron.response);
         this.set('users',iron.response);
       }
 
