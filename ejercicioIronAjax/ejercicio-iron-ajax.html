@@ -54,6 +54,24 @@
         background-color: darkorange;
         color: #FFFF;
       }
+      .primerModal{
+        display: flex;
+      }
+      .primerModal button{
+        background-color: #000F;
+        color: #FFFF;
+        border-radius: 25px;
+      }
+      .nuevoModal{
+        background-color: rgba(19, 133, 99, 0.667);
+        height: 80px;
+      }
+      .nuevoModal button{
+        background-color: rgba(64, 26, 114, 0.667);
+        color: #FFFF;
+        border-radius: 25px;
+      }
+      
     </style>
 
 <iron-ajax
@@ -63,12 +81,21 @@
   >
 </iron-ajax>
 
-  <paper-dialog on-click="modal.open">
+  <paper-dialog class="primerModal" id="modalInicio">
     <div>
-      <button>Ver intento de Consulta</button>
-      <button>Cancelar</button>
+      <button on-click="muestraLaInfo">Ver intento de Consulta</button>
+      <button on-click="abrirNuevoModal">Cancelar</button>
     </div>
   </paper-dialog>
+
+  <mixin-dialog class="nuevoModal" id="nuevoIntento">
+    <div slot="title">
+      <p>nuevo Intento</p>
+    </div>
+    <div slot="buttonRequest">
+      <button on-click="muestraLaInfo">Intenta de Nuevo</button>
+    </div>
+  </mixin-dialog>
 
     <h2>Users List</h2>
     
@@ -108,13 +135,23 @@
   </template>
 
   <script>
-    console.log(Mixins.MyDialog);
-    class EjercicioIronAjax extends Mixins.MixinDialog(Polymer.Element){
+    class EjercicioIronAjax extends Polymer.Element{
       static get is() { return 'ejercicio-iron-ajax'; }
       static get properties() {
         return {
           users:Array,
         };
+      }
+
+      /**
+        * Called every time the element is inserted into the DOM. Useful for 
+        * running setup code, such as fetching resources or rendering.
+        * Generally, you should try to delay work until this time.
+        */
+      connectedCallback() {
+        super.connectedCallback();
+        this.muestraPeticion();
+      
       }
 
       handleResponse(e,iron){
@@ -152,6 +189,28 @@
           case 'strawberry':
             return '🍓';
         }
+      }
+
+      cargarInfo(){
+        //obtenemoa nodo
+        let ajaxRequest = this.shadowRoot.querySelector('#ajaxRequest');
+        ajaxRequest.generateRequest();//metodo propio de iron-ajax, ejecuta la consulta al endPoint
+      }
+
+      muestraPeticion(){
+        //obtenemos el nodo
+        let abreDialog = this.shadowRoot.querySelector('#modalInicio');
+        //metodo open propio de paper-dialog
+        abreDialog.open();
+      }
+
+      muestraLaInfo(){
+        this.cargarInfo();
+      }
+
+      abrirNuevoModal(){
+        let nuevoIntento = this.shadowRoot.querySelector('#nuevoIntento');
+        nuevoIntento.open();//metodo heredado
       }
      
     }
