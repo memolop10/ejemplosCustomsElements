@@ -10,12 +10,19 @@
     <script src="../../web-component-tester/browser.js"></script>
 
     <link rel="import" href="../migracion-polymer-element.html">
+    <link rel="import" href="../p-find-number.html">
   </head>
   <body>
 
     <test-fixture id="BasicTestFixture">
       <template>
         <migracion-polymer-element></migracion-polymer-element>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="parragraphTest">
+      <template>
+        <p-find-number findNumber="9"></p-find-number>
       </template>
     </test-fixture>
 
@@ -43,6 +50,15 @@
           const elementShadowRoot = element.shadowRoot;
           const elementHeader = elementShadowRoot.querySelector('h2');
           assert.equal(elementHeader.innerHTML, 'Hello new-prop1!');
+        });
+
+        test('probando parrafo', () => {
+          const elementoP = fixture('parragraphTest');
+          assert.equal(elementoP.findNumber, 9);
+          const elementPshadowRoot = elementoP.shadowRoot;
+          const elementFindNumber = elementPshadowRoot.querySelector('p');
+          assert.equal(elementFindNumber.innerHTML,'Soy el parrafo');
+          
         });
 
       });
