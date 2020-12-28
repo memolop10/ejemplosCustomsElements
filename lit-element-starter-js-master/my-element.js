@@ -29,6 +29,9 @@ export class MyElement extends LitElement {
         padding: 16px;
         max-width: 800px;
       }
+      p{
+        color: #dead;
+      }
     `;
   }
 
@@ -59,6 +62,7 @@ export class MyElement extends LitElement {
         Click Count: ${this.count}
       </button>
       <slot></slot>
+      <p> Esto es desde el archivo js </p>
     `;
   }
 
