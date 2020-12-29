@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>migracion-polymer-element test</title>
+
+    <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../p-find-number.html">
+  </head>
+  <body>
+
+    <test-fixture id="parragraphTest">
+      <template>
+        <p-find-number find-number="9"></p-find-number>
+      </template>
+    </test-fixture>
+
+
+    <script>
+      suite('migracion-polymer-element', () => {
+
+        test('probando parrafo', function (){
+          let elementoP = fixture('parragraphTest');
+          console.log('este soy yo')
+          //flush(function(){
+            assert.equal(elementoP.findNumber,9);
+            let elementFindNumber = elementoP.shadowRoot.querySelector('p');
+            console.log(elementFindNumber);
+            assert.equal(elementFindNumber.innerHTML,'Encuentra el numero: 9');
+            //done();
+          //});
+        });
+      });
+    </script>
+
+  </body>
+</html>

@@ -10,59 +10,22 @@
     <script src="../../web-component-tester/browser.js"></script>
 
     <link rel="import" href="../migracion-polymer-element.html">
-    <link rel="import" href="../p-find-number.html">
-    <link rel="import" href="../box-number.html">
   </head>
   <body>
 
-    <test-fixture id="BasicTestFixture">
+    <test-fixture id="InicializarComponente">
       <template>
         <migracion-polymer-element></migracion-polymer-element>
       </template>
     </test-fixture>
 
-    <test-fixture id="parragraphTest">
-      <template>
-        <p-find-number findNumber></p-find-number>
-      </template>
-    </test-fixture>
-
-    <test-fixture id="ChangedPropertyTestFixture">
-      <template>
-        <migracion-polymer-element prop1="new-prop1"></migracion-polymer-element>
-      </template>
-    </test-fixture>
-
     <script>
       suite('migracion-polymer-element', () => {
-
-        test('instantiating the element with default properties works', () => {
-          const element = fixture('BasicTestFixture');
-          assert.equal(element.prop1, 'migracion-polymer-element');
-          const elementShadowRoot = element.shadowRoot;
-          const elementHeader = elementShadowRoot.querySelector('h2');
-          assert.equal(elementHeader.innerHTML, 'Hello migracion-polymer-element!');
-        });
-
-        test('setting a property on the element works', () => {
-          // Create a test fixture
-          const element = fixture('ChangedPropertyTestFixture');
-          assert.equal(element.prop1, 'new-prop1');
-          const elementShadowRoot = element.shadowRoot;
-          const elementHeader = elementShadowRoot.querySelector('h2');
-          assert.equal(elementHeader.innerHTML, 'Hello new-prop1!');
-        });
-
-        test('probando parrafo', () => {
-          let elementoP = fixture('parragraphTest');
-          console.log('este soy yo')
-          // flush(function(){
-          //   assert.equal(elementoP.findNumber,'findNumber');
-          //   let elementPshadowRoot = elementoP.shadowRoot;
-          //   let elementFindNumber = elementPshadowRoot.querySelector('p');
-          //   assert.equal(elementFindNumber.innerHTML,'Soy el parrafo');
-          //   done();
-          // });
+        test('Inicializar', () => {
+          const element = fixture('InicializarComponente');
+          assert.isNumber(element.cantidad);
+          assert.equal(element.boxes.length,element.cantidad);
+          assert.equal(element.numberFind <= element.cantidad, true);
         });
       });
     </script>

@@ -8,7 +8,7 @@ export class PerformantTemplate extends LitElement {
         --color-component:#3950cfdd;
       }
       .myBool{
-        color:var(--color-component,#811b5f);
+        --color-component:#811b5f;
       }
 
       p,span{
