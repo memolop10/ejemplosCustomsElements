@@ -7,20 +7,26 @@
     <script type="module" src="../my-element.js"></script>
     <script type="module" src="../another-element.js"></script>
     <script type="module" src="../performant-template.js"></script>
+    <script type="module" src="../compose-template.js"></script>
     <style>
       p {
         border: solid 1px blue;
         padding: 8px;
+        height: 60px;
       }
     </style>
   </head>
   <body>
     <my-element>
-      <p>This is child content</p>
+      <p>Soy el slot Sin NAME</p>
+      <p slot="one"> YO soy el slot con NAME</p>
     </my-element>
     <another-element></another-element>
     <div>
       <performant-template></performant-template>
+    </div>
+    <div>
+      <compose-template></compose-template>
     </div>
   </body>
 </html>

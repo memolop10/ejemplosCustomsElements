@@ -61,7 +61,11 @@ export class MyElement extends LitElement {
       <button @click=${this._onClick} part="button">
         Click Count: ${this.count}
       </button>
-      <slot></slot>
+        <slot></slot>
+        <slot name="one">       
+        </slot>
+      </div>
+      
       <p> Esto es desde el archivo js </p>
     `;
   }
