@@ -43,7 +43,13 @@ export class PerformantTemplate extends LitElement {
         html`<p class="myBool">Me rendereo cuando Soy TRUE</p>`:
         html`<p class="myBool">Me rendereo cuando Soy FALSE</p>`
      }
+
+     <button @click="${this.puchale}">Puchame</button>
     `;
+  }
+
+  puchale(e){
+      console.log(e.target);
   }
 }
 
