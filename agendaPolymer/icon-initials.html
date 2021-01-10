@@ -13,11 +13,13 @@
                 align-items:center;
                 justify-content:center;
                 background-color:var(--icon-bg-color, #2F68CC);
+                width: 40px;
+                height: 40px;
             }
         </style>
 
         <div class="icon">
-
+            [[initials]]
         </div>
 
     </template>
@@ -30,11 +32,20 @@
             }
             static get properties() {
                 return {
+                    person:{
+                      type:String 
+                    },
                     initials:{
-                        type:String,
-                        computed: initialsLetters()
+                      type:String,
+                      computed: '_initialsLetters(person)'
                     }
                 };
+            }
+
+            _initialsLetters(person){
+                let initial = person.split("");
+                let icono = `${initial[0].charAt(0).toUpperCase()}${initial[1].charAt(0).toUpperCase()}`;
+                return icono;
             }
 
         }
