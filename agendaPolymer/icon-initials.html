@@ -1,0 +1,44 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="icon-initials">
+    <template>
+        <style>
+            :host {
+                display: block
+            }
+
+            .icon{
+                border-radius: 25px;
+                display: flex;
+                align-items:center;
+                justify-content:center;
+                background-color:var(--icon-bg-color, #2F68CC);
+            }
+        </style>
+
+        <div class="icon">
+
+        </div>
+
+    </template>
+
+    <script>
+        
+        class IconInitials extends Polymer.Element {
+            static get is() {
+                return 'icon-initials';
+            }
+            static get properties() {
+                return {
+                    initials:{
+                        type:String,
+                        computed: initialsLetters()
+                    }
+                };
+            }
+
+        }
+
+        window.customElements.define(IconInitials.is, IconInitials);
+    </script>
+</dom-module>

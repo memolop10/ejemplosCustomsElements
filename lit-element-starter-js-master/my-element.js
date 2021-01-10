@@ -24,13 +24,18 @@ export class MyElement extends LitElement {
   static get styles() {
     return css`
       :host {
+        color: var(--themeColor,red);
         display: block;
         border: solid 1px gray;
         padding: 16px;
         max-width: 800px;
       }
       p{
-        color: #dead;
+        color: #066153;
+      }
+
+      ::slotted(*){
+        color:var(--themeColor,peru);
       }
     `;
   }

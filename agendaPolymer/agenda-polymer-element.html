@@ -1,0 +1,36 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="agenda-polymer-element">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+  </template>
+
+  <script>
+    /**
+     * `agenda-polymer-element`
+     * 
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class AgendaPolymerElement extends Polymer.Element {
+      static get is() { return 'agenda-polymer-element'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'agenda-polymer-element'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(AgendaPolymerElement.is, AgendaPolymerElement);
+  </script>
+</dom-module>
