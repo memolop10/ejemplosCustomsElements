@@ -1,0 +1,38 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="input-data">
+    <template>
+        <style>
+            :host {
+                display: block
+            }
+        </style>
+
+        <input type="text" placeholder="[[placeholder]]" value="[[data::input]]">
+
+    </template>
+
+    <script>
+        class InputData extends Polymer.Element {
+            /**
+             * String providing the tag name to register the element under.
+             */
+            static get is() {
+                return 'input-data';
+            }
+
+            /**
+             * Object describing property-related metadata used by Polymer features
+             */
+            static get properties() {
+                return {
+                    placeholder:String,
+                    data:String
+                };
+            }
+
+        }
+
+        window.customElements.define(InputData.is, InputData);
+    </script>
+</dom-module>
