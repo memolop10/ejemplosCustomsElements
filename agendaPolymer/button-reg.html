@@ -1,0 +1,50 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="button-reg">
+    <template>
+        <style>
+            :host {
+                display: block
+            }
+            .button{
+                border-radius: 50px;
+                width: var( --button-width ,55px);
+                height: var( --button-height ,55px);
+                background-color:var(--icon-bg-color, #2F68CC);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .image{
+                width: 100%;
+            }
+            
+        </style>
+
+    <button class="button">
+        <template is="dom-if" if="{{url}}">
+            <img src="[[url]]" class="image">
+        </template>
+        <template is="dom-if" if="{{content}}">
+            [[content]]
+        </template>
+    </button>
+        
+
+    </template>
+
+    <script>
+        class ButtonReg extends Polymer.Element {
+            static get is() {return 'button-reg';}
+            static get properties() {
+                return {
+                    url:String,
+                    content:String
+                };
+            }
+
+        }
+
+        window.customElements.define(ButtonReg.is, ButtonReg);
+    </script>
+</dom-module>

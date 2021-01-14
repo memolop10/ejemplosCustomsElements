@@ -1,0 +1,91 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="./icon-initials.html">
+<link rel="import" href="./input-data.html">
+<link rel="import" href="./label-data.html">
+<link rel="import" href="./button-reg.html">
+<dom-module id="form-regist">
+    <template>
+        <style>
+            :host {
+                display: block
+            }
+        </style>
+
+        <div class="formHeader">
+            <icon-initials person="[[name]] [[lastName]]"></icon-initials>
+            <div class="buttonContainer">
+                <button-reg url="./assets/guardar.png" on-clik="dataUser"></button-reg>
+                <button-reg url="./assets/cancelar.png" on-click="canceled"></button-reg>
+            </div>
+        </div>
+        <div class="formContainer">
+            <div class="form">
+                <label-data value="Name:"></label-data>
+                <label-data placeholder="Write Here" id="name" data={{name::input}}></label-data>
+            </div>
+            <div class="form">
+                <label-data value="Last Name:"></label-data>
+                <label-data placeholder="Write Here" id="lastName" data={{lastName::input}}></label-data>
+            </div>
+            <div class="form">
+                <label-data value="Mother Last Name:"></label-data>
+                <label-data placeholder="Write Here" id="motherLastName" data={{motherLastName::input}}></label-data>
+            </div>
+            <div class="form">
+                <label-data value="Age:"></label-data>
+                <label-data placeholder="Write Here" id="age" data={{age::input}}></label-data>
+            </div>
+            <div class="form">
+                <label-data value="Hobbie:"></label-data>
+                <label-data placeholder="Write Here" id="hobbie" data={{hobbie::input}}></label-data>
+            </div>
+        </div>
+
+    </template>
+
+    <script>
+       
+        class FormRegist extends Polymer.Element {
+            static get is() {
+                return 'form-regist';
+            }
+            static get properties() {
+                return {
+                    name:String,
+                    lastName:String,
+                    motherLastName:String,
+                    age:Number,
+                    hobbie:String
+                };
+            }
+            dataUser(){
+                    if(this.name && this.lastName && this.motherLastName && this.age && this.hobbie ){
+                        const personData = {
+                            name: this.name,
+                            lastName: this.lastName,
+                            motherLastName: this.motherLastName,
+                            age: this.age,
+                            hobbie: this.hobbie
+                        }
+
+                        this.this.dispatchEvent(new CustomEvent('complete-form', {
+                            composed:true,
+                            bubbles:true,
+                            detail: personData
+                        }));
+                    }
+            }
+
+            canceled(){
+                this.name = '';
+                this.lastName = '';
+                this.motherLastName = '';
+                this.age = '';
+                this.hobbie = '';
+            }
+
+        }
+
+        window.customElements.define(FormRegist.is, FormRegist);
+    </script>
+</dom-module>
