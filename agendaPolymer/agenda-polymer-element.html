@@ -3,6 +3,7 @@
 <link rel="import" href="./input-data.html">
 <link rel="import" href="./label-data.html">
 <link rel="import" href="./button-reg.html">
+<link rel="import" href="./form-regist.html">
 <dom-module id="agenda-polymer-element">
   <template>
     <style>
@@ -10,12 +11,7 @@
         display: block;
       }
     </style>
-    <h2>Hello [[prop1]]!</h2>
-    <icon-initials person="Guillermo">
-    </icon-initials>
-    <label-data value="NAME"></label-data>
-    <input-data placeholder="name"></input-data>
-    <button-reg url="/assets/guardar.png"></button-reg>
+    <form-regist></form-regist>
   </template>
 
   <script>

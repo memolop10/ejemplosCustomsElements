@@ -1,0 +1,47 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="./icon-initials.html">
+<link rel="import" href="./label-data.html">
+<dom-module id="show-info">
+    <template>
+        <style>
+            :host {
+                display: block
+            }
+        </style>
+
+        <template is="dom-repeat" items="{{list}}" as="person">
+                <fieldset class="field">
+                  <div class="conteinerRegist">
+                    <icon-initials person="[[person.name]] [[person.lastName]]"></icon-initials>
+                    <label-data value="[[person.name]] [[person.lastName]] [[person.motherLastName]]"></label-data>
+                  </div>
+                </fieldset>
+        </template>
+
+    </template>
+
+    <script>
+        class ShowInfo extends Polymer.Element {
+            static get is() {return 'show-info';}
+            static get properties() {
+                return {
+                    list:{
+                        type:Array,
+                        value: () => ([])
+                    }
+                };
+            }
+
+            listRegist(e){
+                let person = e.model.index;
+                this.dispatchEvent(new CustomEvent('view.info', {
+                    composed:true,
+                    bubbles:true,
+                    detail:person
+                }));
+            }
+        }
+
+        window.customElements.define(ShowInfo.is, ShowInfo);
+    </script>
+</dom-module>

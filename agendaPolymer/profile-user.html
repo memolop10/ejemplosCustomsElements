@@ -1,0 +1,83 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="./label-data.html">
+<link rel="import" href="./icon-initials.html">
+<link rel="import" href="./button-reg.html">
+<dom-module id="profile-user">
+    <template>
+        <style>
+            :host {
+                display: block
+            }
+        </style>
+
+        <div class="header">
+            <icon-initials person="[[people.name]] [[people.lastName]]"></icon-initials>
+            <div class="buttonContainer">
+                <button-reg url="assets/editar.png"></button-reg>
+                <button-reg url="assets/eliminar.png"></button-reg>
+            </div>
+
+            <div class="dataUser">
+                <label-data value="Name:"></label-data>
+                <label-data value="[[infoUser.name]]"></label-data>
+            </div>
+            <div class="dataUser">
+                <label-data value="Last Name:"></label-data>
+                <label-data value="[[infoUser.lastName]]"></label-data>
+            </div>
+            <div class="dataUser">
+                <label-data value="Mother Last Name:"></label-data>
+                <label-data value="[[infoUser.motherLastName]]"></label-data>
+            </div>
+            <div class="dataUser">
+                <label-data value="Age:"></label-data>
+                <label-data value="[[infoUser.age]]"></label-data>
+            </div>
+            <div class="dataUser">
+                <label-data value="hobbie:"></label-data>
+                <label-data value="[[infoUser.hobbie]]"></label-data>
+            </div>
+            
+        </div>
+        
+
+    </template>
+
+    <script>
+        class ProfileUser extends Polymer.Element {
+            static get is() {return 'profile-user';}
+            /**
+             * Object describing property-related metadata used by Polymer features
+             */
+            static get properties() {
+                return {
+                  infoUser:{
+                      type:Object,
+                      value: () => ({})
+                  } ,
+                  index:Number 
+                };
+            }
+
+            deleteUser(){
+                let id = this.index;
+                this.dispatchEvent(new CustomEvent('delete-user', {
+                    composed:true,
+                    bubbles:true,
+                    detail:id
+                }));
+            }
+
+            editUser(){
+                let id = this.index;
+                this.dispatchEvent(new CustomEvent('edit-user', {
+                    composed:true,
+                    bubbles:true,
+                    detail:id                    
+                }));
+            }
+        }
+
+        window.customElements.define(ProfileUser.is, ProfileUser);
+    </script>
+</dom-module>
