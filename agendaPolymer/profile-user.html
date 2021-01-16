@@ -8,6 +8,16 @@
             :host {
                 display: block
             }
+            .header{
+                display: flex;
+            }
+            icon-initials{
+                width:100%;
+            }
+            .buttonContainer{
+                width:100%;
+                display: flex;
+            }
         </style>
 
         <div class="header">
@@ -16,7 +26,7 @@
                 <button-reg url="/assets/editar.png"></button-reg>
                 <button-reg url="/assets/eliminar.png"></button-reg>
             </div>
-
+        </div>
             <div class="dataUser">
                 <label-data value="Name:"></label-data>
                 <label-data value="[[infoUser.name]]"></label-data>
@@ -38,7 +48,7 @@
                 <label-data value="[[infoUser.hobbie]]"></label-data>
             </div>
             
-        </div>
+        
         
 
     </template>
