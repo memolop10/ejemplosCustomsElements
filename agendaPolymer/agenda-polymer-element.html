@@ -4,6 +4,8 @@
 <link rel="import" href="./label-data.html">
 <link rel="import" href="./button-reg.html">
 <link rel="import" href="./form-regist.html">
+<link rel="import" href="./profile-user.html">
+<link rel="import" href="./show-info.html">
 <dom-module id="agenda-polymer-element">
   <template>
     <style>
@@ -11,7 +13,16 @@
         display: block;
       }
     </style>
-    <form-regist></form-regist>
+    <div>
+      <form-regist></form-regist>
+    </div>
+    <div>
+      <profile-user></profile-user>
+    </div>
+    <div>
+      <show-info></show-info>
+    </div>
+   
   </template>
 
   <script>
