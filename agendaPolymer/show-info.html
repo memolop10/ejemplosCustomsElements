@@ -7,9 +7,18 @@
             :host {
                 display: block
             }
+            .field{
+                border: 1px solid #000F ;
+                border-radius: 10px;
+                display: flex;
+            }
+            .containerRegist{
+                display: flex;
+                align-items: center;
+            }
         </style>
 
-        <template is="dom-repeat" items="{{list}}" as="person">
+        <template is="dom-repeat" items="{{listRegist}}" as="person">
                 <fieldset class="field">
                   <div class="conteinerRegist">
                     <icon-initials person="[[person.name]] [[person.lastName]]"></icon-initials>
@@ -25,7 +34,7 @@
             static get is() {return 'show-info';}
             static get properties() {
                 return {
-                    list:{
+                    listRegist:{
                         type:Array,
                         value: () => ([])
                     }
@@ -34,7 +43,7 @@
 
             listRegist(e){
                 let person = e.model.index;
-                this.dispatchEvent(new CustomEvent('view.info', {
+                this.dispatchEvent(new CustomEvent('view-info', {
                     composed:true,
                     bubbles:true,
                     detail:person

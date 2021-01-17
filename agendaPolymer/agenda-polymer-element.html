@@ -13,16 +13,50 @@
         display: block;
       }
     </style>
-    <div>
-      <form-regist></form-regist>
-    </div>
-    <div>
-      <profile-user></profile-user>
-    </div>
-    <div>
-      <show-info></show-info>
-    </div>
-   
+
+    <template is="dom-if" if="[[add]]">
+        <form-regist
+          id="add"
+          on-complete-form="{{addRegist}}" 
+          regist-person="{{registPerson}}"  
+        >
+      </form-regist>
+    </template>
+    
+    <template is="dom-if" if="[[list]]">
+      <div class="header">
+        <button-reg
+          url="/assets/agregar.png"
+          on-click="addingRegist"  
+        >
+        </button-reg>
+      </div>
+      <show-info
+        list-regist="{{registAgenda}}"
+        on-view-info="seeRegist"
+      ></show-info>
+    </template>
+
+    <template is="dom-if" if="[[regist]]">
+        <profile-user
+          regist-person="registPerson"
+          index="{{id}}"
+          on-delete-user="deleteRegist"
+          on-edit-user="editRecord"
+        ></profile-user>
+    </template>
+    
+    <template is="dom-if" if="[[edit]]">
+      <form-regist
+        on-complete-form="editRegist"
+        name="{{registPerson.name}}"
+        last-name="{{registPerson.lastName}}"
+        mother-last-name="{{registPerson.motherLastName}}"
+        age="{{registPerson.age}}"
+        hobbie="{{registPerson.hobbie}}"
+        index="{{id}}"
+      ></form-regist>
+    </template>
   </template>
 
   <script>
@@ -33,8 +67,101 @@
           add:Boolean,
           list:Boolean,
           edit:Boolean,
-          viewRegister:Boolean
+          viewRegister:Boolean,
+          id:Number,
+          registAgenda:{
+            type:Array,
+            value: () => ([])
+          },
+          registPerson:{
+            type:Object,
+            value:() => ({})
+          }
         };
+      }
+
+      /**
+        * Instance of the element is created/upgraded. Useful for initializing
+        * state, set up event listeners, create shadow dom.
+        * @constructor
+        */
+      constructor() {
+        super();
+        this.add=true;
+      }
+
+      addRegist(e){
+        let eDetail = e.detail;
+        let arrayAgenda = this.registAgenda;
+        this.set('registAgenda',[]);
+        arrayAgenda.push(eDetail);
+        setTimeout( () => this.set('registAgenda',arrayAgenda), 10);
+        this.edit = false;
+        this.viewRegister = false;
+        this.add = false;
+        this.list = true;
+        this.shadowRoot.querySelector('#add').canceled();
+      }
+
+      seeRegist(e){
+        let identifier = e.detail;
+        this.id = identifier;
+        this.registPerson = this.registAgenda[identifier];
+        this.edit = false;
+        this.add = false;
+        this.list = false;
+        this.viewRegister = true;
+      }
+
+      deleteRegist(e){
+        let id = e.detail;
+        let arrayAgenda = this.registAgenda;
+        this.set('registAgenda',[]);
+        arrayAgenda.splice(id, 1);
+        setTimeout(() => this.set('registAgenda',arrayAgenda),10);
+        if(arrayAgenda){
+          this.edit = false;
+          this.viewRegister = false;
+          this.list = true;
+          this.add = false;
+        }else{
+          this.edit = false;
+          this.viewRegister = false;
+          this.list = false;
+          this.add = true;
+        }
+      }
+
+      addingRegist(e){
+        this.viewRegister = false;
+        this.list = false;
+        this.edit = false;
+        this.add = true;
+        this.set('registPerson',{
+          name:'',
+          lastName:'',
+          motherLastName:'',
+          age:'',
+          hobbie:''
+        })
+      }
+
+      editRecord() {
+        this.viewRegister = false;
+        this.list = false;
+        this.add = false;
+        this.edit = true;
+      }
+
+      editRegist(e){
+        let arrayAgenda = this.registAgenda;
+        this.set('registAgenda',[]);
+        arrayAgenda.splice(this.id,1,e.detail);
+        setTimeout( () => this.set('registAgenda',arrayAgenda),10);
+        this.edit = false;
+        this.viewRegister = false;
+        this.add = false;
+        this.list = true;
       }
     }
 
