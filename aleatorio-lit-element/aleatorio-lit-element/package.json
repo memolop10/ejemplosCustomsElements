@@ -1,0 +1,19 @@
+{
+  "name": "aleatorio-lit-element",
+  "version": "0.0.0",
+  "description": "Webcomponent aleatorio-lit-element following open-wc recommendations",
+  "author": "aleatorio-lit-element",
+  "license": "MIT",
+  "main": "index.js",
+  "module": "index.js",
+  "scripts": {
+    "start": "web-dev-server"
+  },
+  "dependencies": {
+    "lit-html": "^1.1.2",
+    "lit-element": "^2.2.1"
+  },
+  "devDependencies": {
+    "@web/dev-server": "^0.1.1"
+  }
+}

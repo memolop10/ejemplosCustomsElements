@@ -204,15 +204,31 @@
         abreDialog.open();
       }
 
+      cerrarPeticion(){
+        //obtener nodo
+        let cerrarDialog = this.shadowRoot.querySelector('#modalInicio');
+        //metodo close propio de paper-dialog
+        cerrarDialog.close();
+      }
+
       muestraLaInfo(){
         this.cargarInfo();
+        this.cerrarPeticion();
+        this.cerrarNuevoIntento()
       }
+
+      
 
       abrirNuevoModal(){
         let nuevoIntento = this.shadowRoot.querySelector('#nuevoIntento');
         nuevoIntento.open();//metodo heredado
       }
-     
+
+      cerrarNuevoIntento(){
+        //seleccionando nodo
+        let closeNuevoModal = this.shadowRoot.querySelector('#nuevoIntento');
+        closeNuevoModal.close();//metodo heredado
+      }
     }
 
    

@@ -1,0 +1,54 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="pattern-component">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <button on-click="changeName">Change Name</button>
+
+    <h2>[[fullName]]!</h2>
+    <h2>[[_reverseName(name,lastName)]]</h2>
+  </template>
+
+  <script>
+    class PatternComponent extends Polymer.Element {
+      static get is() { return 'pattern-component'; }
+      static get properties() {
+        return {
+          name: {
+            type: String,
+            value: 'Guillermo'
+          },
+          lastName:{
+            type:String,
+            value:'Lopez'
+          },
+          fullName:{
+            type:String,
+            computed:'_getFullName(name,lastName)'
+          }
+        };
+      }
+
+      changeName(e){
+        console.log('cambia el name' , e)
+        this.set('name','Ronaldo');
+      }
+
+      _getFullName(nombre,apellido){
+        console.log('esta es la computed property')
+        return `my full name es: ${nombre} ${apellido}`
+      }
+
+      _reverseName(name,lastname){
+        console.log('es es el computed binding')
+        return `my full name es: ${name} ${lastname}`
+      }
+    }
+
+    window.customElements.define(PatternComponent.is, PatternComponent);
+  </script>
+</dom-module>
