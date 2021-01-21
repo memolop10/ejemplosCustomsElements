@@ -1,0 +1,40 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="child-element">
+    <template>
+        <style>
+            :host {
+                display: block
+            }
+        </style>
+          <ul>
+            <template is="dom-repeat" items="{{names}}" as="name">
+               <li> [[name]] </li> 
+            </template>
+          </ul>
+    </template>
+
+    <script>
+        class ChildElement extends Polymer.Element {
+            static get is() {
+                return 'child-element';
+            }
+            static get properties() {
+                return {
+                    names:{
+                        type:Array,
+                        value:[
+                          'guillermo',
+                          'eri',
+                          'Alberto',
+                          'Enrique'
+                        ]
+                    }
+                };
+            }
+
+        }
+
+        window.customElements.define(ChildElement.is, ChildElement);
+    </script>
+</dom-module>
