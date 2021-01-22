@@ -37,9 +37,9 @@
       ></show-info>
     </template>
 
-    <template is="dom-if" if="[[regist]]">
+    <template is="dom-if" if="[[viewRegister]]">
         <profile-user
-          regist-person="registPerson"
+          info-user="{{registPerson}}"
           index="{{id}}"
           on-delete-user="deleteRegist"
           on-edit-user="editRecord"
